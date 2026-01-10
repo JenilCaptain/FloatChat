@@ -1,0 +1,105 @@
+# prompt.py - system + RAG prompt
+
+from typing import List, Dict, Any
+
+
+class PromptTemplate:
+    """Handles prompt templates for RAG system."""
+    
+    SYSTEM_PROMPT = """
+    You are a helpful AI assistant specialized in answering questions based on provided context.
+    Your responses should be:
+    - Accurate and based on the given context
+    - Clear and concise
+    - Informative and helpful
+    - Honest about limitations (if context doesn't contain relevant information)
+
+    Always cite information from the context when answering questions.
+    If you cannot cite a source number, say "Source not found in context".
+
+    """
+
+    RAG_PROMPT_TEMPLATE = """
+    Context: {context}
+
+    Question: {question}
+
+    Instructions: Answer the question based on the context provided above. If the context doesn't contain enough information to answer the question, say so clearly.
+
+    Answer:
+
+    """
+
+    def __init__(self, system_prompt: str = None):
+        """
+        Initialize prompt template.
+        
+        Args:
+            system_prompt: Custom system prompt (optional)
+        """
+        self.system_prompt = system_prompt or self.SYSTEM_PROMPT
+    
+    def format_rag_prompt(self, question: str, context: str) -> str:
+        """
+        Format RAG prompt with context and question.
+        
+        Args:
+            question: User's question
+            context: Retrieved context from documents
+            
+        Returns:
+            Formatted prompt string
+        """
+        return self.RAG_PROMPT_TEMPLATE.format(
+            context=context,
+            question=question
+        )
+    
+    def format_chat_messages(self, question: str, context: str) -> List[Dict[str,str]]:
+        """
+        Format messages for chat-based LLM.
+        
+        Args:
+            question: User's question
+            context: Retrieved context from documents
+            
+        Returns:
+            List of message dictionaries
+        """
+        user_content = f"""
+        Context: {context}
+
+        Question: {question}
+
+        Please answer the question based on the context provided above."""
+        
+        return [
+            {"role": "system", "content": self.system_prompt},
+            {"role": "user", "content": user_content}
+        ]
+    
+    def format_context_from_results(self, results: List[Dict[str, Any]]) -> str:
+        """
+        Format retrieved results into context string.
+        
+        Args:
+            results: List of retrieved documents with scores
+            
+        Returns:
+            Formatted context string
+        """
+        context_parts = []
+        
+        for idx, result in enumerate(results, 1):
+            doc = result.get('document', {})
+            text = doc.get('text', '')
+            metadata = doc.get('metadata', {})
+            
+            context_part = f"[Source {idx}]\n{text}"
+            
+            if metadata:
+                context_part += f"\nMetadata: {metadata}"
+            
+            context_parts.append(context_part)
+        
+        return "\n\n".join(context_parts)

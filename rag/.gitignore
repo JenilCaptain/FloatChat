@@ -1,0 +1,42 @@
+# Virtual environment
+venv/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Python packaging
+*.egg-info/
+dist/
+build/
+
+# Streamlit
+.streamlit/
+
+# IDE settings
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Jupyter
+.ipynb_checkpoints/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Log files
+*.log
+*.jsonl
+logs/*.log
+logs/*.jsonl
+
+# Vector database storage
+qdrant_storage/
+.qdrant/
+
+# Large data files
+data/embeddings/
+data/raw/
