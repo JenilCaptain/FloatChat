@@ -31,8 +31,26 @@ class RAGPipeline:
         Returns:
             Dictionary containing answer and metadata
         """
+        
+        # error checks
+        # print(type(self.retriever))
+        # print(hasattr(self.retriever, "retrieve"))
+        # print(dir(self.retriever))
+        # passed
+
+        # # error check:
+        # print("hey, in rag_pipeline 1 line 36")
+        # # Debug vector_db object
+        # print(f"Vector DB type: {type(self.retriever.vector_db)}")
+        # print(f"Has search method: {hasattr(self.retriever.vector_db, 'search')}")
+        # print(f"Vector DB methods: {[m for m in dir(self.retriever.vector_db) if not m.startswith('_')]}")
+        # # passed
+
         # Step 1: Retrieve relevant documents
         retrieved_docs = self.retriever.retrieve(question, top_k=top_k)
+
+        # # error check:
+        # print("hey, in rag_pipeline 2 line 42")
         
         if not retrieved_docs:
             return {
@@ -71,8 +89,14 @@ class RAGPipeline:
             Dictionary containing answer and metadata
         """
         # Retrieve and format context
+
+        
+
         retrieved_docs = self.retriever.retrieve(question, top_k=top_k)
         
+        # # error check:
+        # print("hey, in rag_pipeline 2")
+
         if not retrieved_docs:
             return {
                 "answer": "I couldn't find any relevant information to answer your question.",

@@ -1,0 +1,28 @@
+# RAG Pipeline Dependencies
+
+# Data Loading & Processing
+pandas>=1.5.0
+pyarrow>=10.0.0
+
+# Embeddings
+sentence-transformers>=2.2.0
+torch>=1.9.0
+
+# Vector Database
+qdrant-client>=1.7.0
+
+# LLM Interface
+ollama>=0.0.1
+
+# Tokenization
+tiktoken>=0.5.0
+
+# Utilities
+numpy>=1.21.0
+requests>=2.28.0
+tqdm>=4.65.0
+
+# Optional: Development & Testing
+pytest>=7.0.0
+black>=22.0.0
+pylint>=2.15.0

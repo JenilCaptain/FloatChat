@@ -100,6 +100,8 @@ class DataLoader:
                 value = row[field]
                 if isinstance(value, (pd.Timestamp, pd.DatetimeTZDtype)):
                     value = str(value)
+                elif isinstance(value, pd.Period):
+                    value = str(value.to_timestamp())  # Convert Period to Timestamp then to string
                 elif isinstance(value, (pd.Int64Dtype, pd.Float64Dtype)):
                     value = float(value) if pd.notna(value) else None
                 metadata[field] = value

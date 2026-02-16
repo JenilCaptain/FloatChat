@@ -1,7 +1,7 @@
 # config.py - Configuration settings
 
 import os
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 
@@ -25,7 +25,7 @@ class VectorDBConfig:
 @dataclass
 class LLMConfig:
     """Configuration for language model."""
-    model_name: str = "mistral:7b-instruct-q4_0"
+    model_name: str = "mistral:7b-instruct-q4_0"  # Ollama auto-detects GPU
     base_url: str = "http://localhost:11434"
     temperature: float = 0.7
     max_tokens: Optional[int] = None
@@ -49,14 +49,16 @@ class RetrievalConfig:
 @dataclass
 class RAGConfig:
     """Main RAG system configuration."""
-    embedding: EmbeddingConfig = EmbeddingConfig()
-    vectordb: VectorDBConfig = VectorDBConfig()
-    llm: LLMConfig = LLMConfig()
-    chunker: ChunkerConfig = ChunkerConfig()
-    retrieval: RetrievalConfig = RetrievalConfig()
+    embedding: EmbeddingConfig = field(default_factory=EmbeddingConfig)
+    vectordb: VectorDBConfig = field(default_factory=VectorDBConfig)
+    llm: LLMConfig = field(default_factory=LLMConfig)
+    chunker: ChunkerConfig = field(default_factory=ChunkerConfig)
+    retrieval: RetrievalConfig = field(default_factory=RetrievalConfig)
     
     # Data paths
-    data_path: str = "data/processed"
+    data_path: str = "data"  # Path to Parquet files (argo_profiles_master.parquet, argo_profiles_reduced.parquet)
+    logs_path: str = "logs"  # Path to store RAG pipeline logs
+    vectordb_path: str = "vectordb"  # Path to Qdrant database (for in-memory or persistent storage)
     
     @classmethod
     def from_env(cls):
@@ -86,5 +88,7 @@ class RAGConfig:
                 top_k=int(os.getenv("TOP_K", "5")),
                 similarity_threshold=float(os.getenv("SIMILARITY_THRESHOLD", "0.5"))
             ),
-            data_path=os.getenv("DATA_PATH", "data/processed")
+            data_path=os.getenv("DATA_PATH", "data"),
+            logs_path=os.getenv("LOGS_PATH", "logs"),
+            vectordb_path=os.getenv("VECTORDB_PATH", "vectordb")
         )
