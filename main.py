@@ -64,10 +64,10 @@ def setup_pipeline(config: RAGConfig, force_reindex: bool = False) -> RAGPipelin
         
         # 1. Load Data
         print("\n[1/5] Loading data from Parquet files...")
-        reduced_file = Path(config.data_path) / "argo_profiles_reduced.parquet"
-        data_loader = DataLoader(str(reduced_file), auto_transform=True)
+        master_file = Path(config.data_path) / "argo_profiles_master.parquet"
+        data_loader = DataLoader(str(master_file), auto_transform=True)
         documents = data_loader.load_all_documents()
-        print(f"✓ Loaded {len(documents)} documents from reduced dataset")
+        print(f"✓ Loaded {len(documents)} documents from master dataset")
         
         # 2. Chunk Documents
         print("\n[2/5] Chunking documents into tokens...")

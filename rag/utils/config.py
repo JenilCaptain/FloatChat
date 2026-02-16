@@ -17,7 +17,7 @@ class VectorDBConfig:
     """Configuration for vector database."""
     host: str = "localhost"
     port: int = 6333
-    collection_name: str = "documents"
+    collection_name: str = "FloatChat-Data_embeddings"
     vector_size: int = 384  # Default for all-MiniLM-L6-v2
     distance_metric: str = "Cosine"
 
