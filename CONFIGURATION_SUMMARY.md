@@ -13,51 +13,51 @@ AFTER:  "data"              ← Points directly to your Parquet files
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    RAG PIPELINE CONFIGURATION                │
+│                    RAG PIPELINE CONFIGURATION               │
 ├─────────────────────────────────────────────────────────────┤
-│                                                               │
-│  📁 DATA LOADING                                             │
+│                                                             │
+│  📁 DATA LOADING                                           │
 │  ├─ Source: data/*.parquet                                  │
-│  ├─ Format: Argo oceanographic profiles                      │
+│  ├─ Format: Argo oceanographic profiles                     │
 │  └─ Transform: Auto-convert to RAG text format              │
-│                                                               │
-│  ✂️  TEXT CHUNKING                                           │
+│                                                             │
+│  ✂️  TEXT CHUNKING                                          │
 │  ├─ Method: Token-based (not character)                     │
 │  ├─ Chunk size: 500 tokens                                  │
 │  ├─ Overlap: 100 tokens                                     │
-│  └─ Encoding: cl100k_base (GPT-4 compatible)               │
-│                                                               │
+│  └─ Encoding: cl100k_base (GPT-4 compatible)                │
+│                                                             │
 │  🔢 EMBEDDINGS                                              │
-│  ├─ Model: sentence-transformers/all-MiniLM-L6-v2          │
+│  ├─ Model: sentence-transformers/all-MiniLM-L6-v2           │
 │  ├─ Dimension: 384                                          │
 │  ├─ Normalization: YES ✓                                    │
 │  └─ Distance: Cosine similarity                             │
-│                                                               │
-│  🗄️  VECTOR DATABASE                                         │
+│                                                             │
+│  🗄️  VECTOR DATABASE                                        │
 │  ├─ Type: Qdrant                                            │
 │  ├─ Host: localhost:6333                                    │
 │  ├─ Collection: documents                                   │
-│  └─ ID Strategy: UUID (prevents overwrites)                │
-│                                                               │
+│  └─ ID Strategy: UUID (prevents overwrites)                 │
+│                                                             │
 │  🤖 LANGUAGE MODEL                                          │
 │  ├─ Type: Ollama                                            │
-│  ├─ Model: mistral:7b-instruct-q4_0                        │
+│  ├─ Model: mistral:7b-instruct-q4_0                         │
 │  ├─ Host: localhost:11434                                   │
 │  ├─ Temperature: 0.7                                        │
-│  └─ Safety: Anti-hallucination guardrail ✓                 │
-│                                                               │
+│  └─ Safety: Anti-hallucination guardrail ✓                  │
+│                                                             │
 │  📚 RETRIEVAL                                               │
 │  ├─ Method: Similarity search                               │
 │  ├─ Top-K: 5 documents                                      │
-│  ├─ Threshold: 0.5 (optional)                              │
+│  ├─ Threshold: 0.5 (optional)                               │
 │  └─ Format: Returns score + document                        │
-│                                                               │
+│                                                             │
 │  📝 LOGGING                                                 │
 │  ├─ Location: logs/                                         │
-│  ├─ Format: JSONL (one JSON per line)                      │
-│  ├─ Tracks: queries, documents, answers, errors            │
-│  └─ Auto-dated: rag_queries_YYYYMMDD.jsonl                │
-│                                                               │
+│  ├─ Format: JSONL (one JSON per line)                       │
+│  ├─ Tracks: queries, documents, answers, errors             │
+│  └─ Auto-dated: rag_queries_YYYYMMDD.jsonl                  │
+│                                                             │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -83,7 +83,7 @@ AFTER:  "data"              ← Points directly to your Parquet files
 │   Temperature: 28.86°C               │
 │   Salinity: 35.35 PSU..."            │
 │  {metadata: {...}}                   │
-└──────────┬──────────────────────────┘
+└──────────┬───────────────────────────┘
            │
            ▼
 ┌──────────────────────┐
@@ -97,7 +97,7 @@ AFTER:  "data"              ← Points directly to your Parquet files
 │  HuggingFaceEmbedder │
 │ (embedder.py)        │
 │ ✅ Normalized        │
-│ → [0.123, 0.456...] │
+│ → [0.123, 0.456...]  │
 └──────────┬───────────┘
            │
            ▼
