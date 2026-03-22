@@ -6,7 +6,7 @@ from typing import Optional, Dict, Any
 class OllamaLLM:
     """Wrapper for Ollama LLM."""
     
-    def __init__(self, model_name: str = "mistral:7b-instruct-q4_0", base_url: str = "http://localhost:11434"):
+    def __init__(self, model_name: str = "phi3", base_url: str = "http://localhost:11434"):
         """
         Initialize Ollama LLM.
         

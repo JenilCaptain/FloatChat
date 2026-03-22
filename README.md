@@ -94,7 +94,7 @@ All paths are automatically configured in `rag/utils/config.py`:
 data_path: str = "data"              # Parquet files location
 logs_path: str = "logs"              # Query logs location
 vectordb: "localhost:6333"           # Qdrant database
-llm: "mistral:7b-instruct-q4_0"     # Language model
+llm: "phi3"     # Language model
 ```
 
 ## 📊 System Architecture
@@ -183,7 +183,7 @@ recall = recall_at_k(retrieved_ids, relevant_ids, k=5)
 
 **"Connection refused"** → Start Qdrant: `docker run -d -p 6333:6333 qdrant/qdrant`
 
-**"Model not found"** → Pull model: `ollama pull mistral:7b-instruct-q4_0`
+**"Model not found"** → Pull model: `ollama pull phi3`
 
 **"No module named..."** → Install dependencies: `pip install -r requirements.txt`
 

@@ -25,7 +25,7 @@ class VectorDBConfig:
 @dataclass
 class LLMConfig:
     """Configuration for language model."""
-    model_name: str = "mistral:7b-instruct-q4_0"  # Ollama auto-detects GPU
+    model_name: str = "phi3"  # Ollama auto-detects GPU
     base_url: str = "http://localhost:11434"
     temperature: float = 0.7
     max_tokens: Optional[int] = None
@@ -75,7 +75,7 @@ class RAGConfig:
                 vector_size=int(os.getenv("VECTOR_SIZE", "384"))
             ),
             llm=LLMConfig(
-                model_name=os.getenv("LLM_MODEL", "mistral:7b-instruct-q4_0"),
+                model_name=os.getenv("LLM_MODEL", "phi3"),
                 base_url=os.getenv("OLLAMA_URL", "http://localhost:11434"),
                 temperature=float(os.getenv("LLM_TEMPERATURE", "0.7"))
             ),

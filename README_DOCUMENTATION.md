@@ -38,7 +38,7 @@
 - **Data path:** `"data"`
 - **Logs path:** `"logs"`
 - **Vector DB:** `localhost:6333`
-- **LLM:** `mistral:7b-instruct-q4_0`
+- **LLM:** `phi3`
 
 ### Main Entry Point
 
@@ -173,7 +173,7 @@ Only install/run these (everything else is configured):
 
 2. **Ollama** - For LLM serving
    ```bash
-   ollama pull mistral:7b-instruct-q4_0
+   ollama pull phi3
    ollama serve
    ```
 
@@ -239,7 +239,7 @@ Once running, ask:
 → Start Qdrant: `docker run -d -p 6333:6333 qdrant/qdrant`
 
 **"Model not found"**
-→ Pull model: `ollama pull mistral:7b-instruct-q4_0`
+→ Pull model: `ollama pull phi3`
 
 **"No module named 'sentence_transformers'"**
 → Install: `pip install sentence-transformers`

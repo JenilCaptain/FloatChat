@@ -63,7 +63,7 @@ export QDRANT_PORT="6333"
 export COLLECTION_NAME="documents"
 
 # LLM settings
-export LLM_MODEL="mistral:7b-instruct-q4_0"
+export LLM_MODEL="phi3"
 export OLLAMA_URL="http://localhost:11434"
 export LLM_TEMPERATURE="0.7"
 
@@ -128,7 +128,7 @@ docker run -d -p 6333:6333 qdrant/qdrant
 # Install Ollama from: https://ollama.ai
 
 # Pull and run the model
-ollama pull mistral:7b-instruct-q4_0
+ollama pull phi3
 ollama serve
 
 # In another terminal, verify:
@@ -250,7 +250,7 @@ Error in chat completion: ... model not found
 **Fix:** Pull the model in Ollama
 
 ```bash
-ollama pull mistral:7b-instruct-q4_0
+ollama pull phi3
 ollama serve
 ```
 

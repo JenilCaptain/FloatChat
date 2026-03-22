@@ -8,7 +8,7 @@ Your RAG pipeline is **fully configured and ready to run**. Here's what changed:
 
 - **Data path:** `data/` → Points to your Parquet files
 - **Logs path:** `logs/` → Stores all query logs
-- **LLM model:** `mistral:7b-instruct-q4_0` → Optimized for oceanographic data
+- **LLM model:** `phi3` → Optimized for oceanographic data
 - **Embedding model:** `sentence-transformers/all-MiniLM-L6-v2` → Normalized for best cosine similarity
 - **Chunking:** Token-based (500 tokens, 100 overlap) → Better semantic coherence
 - **Anti-hallucination:** System prompt includes guardrail
@@ -195,7 +195,7 @@ See `rag/evaluation/` for full evaluation toolkit.
 
 ```
 → Mistral not pulled
-→ Fix: ollama pull mistral:7b-instruct-q4_0
+→ Fix: ollama pull phi3
 ```
 
 ### Slow first run?
