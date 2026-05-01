@@ -25,7 +25,7 @@ class VectorDBConfig:
 @dataclass
 class LLMConfig:
     """Configuration for language model."""
-    model_name: str = "phi3"  # Ollama auto-detects GPU
+    model_name: str = "mistral"  # Ollama auto-detects GPU
     base_url: str = "http://localhost:11434"
     temperature: float = 0.7
     max_tokens: Optional[int] = None
@@ -42,7 +42,7 @@ class ChunkerConfig:
 @dataclass
 class RetrievalConfig:
     """Configuration for retrieval."""
-    top_k: int = 5
+    top_k: int = 10
     similarity_threshold: float = 0.5
 
 
@@ -85,7 +85,7 @@ class RAGConfig:
                 encoding_name=os.getenv("ENCODING_NAME", "cl100k_base")
             ),
             retrieval=RetrievalConfig(
-                top_k=int(os.getenv("TOP_K", "5")),
+                top_k=int(os.getenv("TOP_K", "10")),
                 similarity_threshold=float(os.getenv("SIMILARITY_THRESHOLD", "0.5"))
             ),
             data_path=os.getenv("DATA_PATH", "data"),

@@ -66,8 +66,8 @@ class RAGPipeline:
         prompt = self.prompt_template.format_rag_prompt(question, context)
         
         # Step 4: Generate answer using LLM
-        answer = self.llm.generate(prompt, temperature=temperature)
-        
+        messages = self.prompt_template.format_chat_messages(question, context)
+        answer = self.llm.chat(messages, temperature=temperature)
         # Step 5: Return result with metadata
         return {
             "answer": answer,
